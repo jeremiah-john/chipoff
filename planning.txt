@@ -1,0 +1,16 @@
+how to split up CHIP-8 Emulator
+	memory.c and memory.h
+		variables:
+			- mainMemory: a byte array (in C we have an unsigned char) of length 4096
+		functions:
+			- loadProgram(string fileName): load a CHIP8 ROM specified by the filename into the mainMemory array, starting at location 512
+			- writeMemToMem(int firstLocation, int secondLocation): move value from firstLocation in mainMemory array to secondLocation
+			- writeRegToMem(int regNumber, int memoryLocation): move value in the register specified by regNumber to memoryLocation in mainMemory array
+			- writeRegToReg
+	
+	
+	notes: 
+		most CHIP8 programs start at location 512, because in original machines, the CHIP8 interpreter occupied the first 512 bytes, but in emulation, these bytes are used for storing the
+		font. locations (3840 to 4095) are reserved for display refresh(???) and locations (3744 to 3839) are used for call stack, internal use, and other variables. call stack should have 16
+		levels, so 32 bytes (locations 3744 to 3776) will be used for call stack. (there will be posed a problem with pushing one 16-bit value(the memory address to jump to) into an array with
+		8-bits ineach memory space, so we will use bitwise operations
