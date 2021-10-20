@@ -21,6 +21,6 @@ int loadProgram(char *gameFileName)
 			nextBlock++;
 		}
 	}
-	fclose(gameFileName);
+	fclose(currentGame);
 	return 0;
 }
