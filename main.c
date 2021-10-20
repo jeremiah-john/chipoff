@@ -3,7 +3,6 @@
 #include <errno.h>
 #include "memory.h"
 
-FILE *currentGame;
 
 int main()
 {

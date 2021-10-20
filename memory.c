@@ -3,9 +3,10 @@
 #include "memory.h"
 
 unsigned char mainMemory[4096];
-extern FILE *currentGame;
 int loadProgram(char *gameFileName)
 {
+	
+        FILE *currentGame;
 	currentGame = fopen(gameFileName,"r");
 	if(currentGame == NULL) //if there was a problem opening the file
 	{
@@ -20,5 +21,6 @@ int loadProgram(char *gameFileName)
 			nextBlock++;
 		}
 	}
+	fclose(gameFileName);
 	return 0;
 }
