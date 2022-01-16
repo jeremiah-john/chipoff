@@ -14,3 +14,7 @@ how to split up CHIP-8 Emulator
 		font. locations (3840 to 4095) are reserved for display refresh(???) and locations (3744 to 3839) are used for call stack, internal use, and other variables. call stack should have 16
 		levels, so 32 bytes (locations 3744 to 3776) will be used for call stack. (there will be posed a problem with pushing one 16-bit value(the memory address to jump to) into an array with
 		8-bits ineach memory space, so we will use bitwise operations
+
+		the timers should not affect the running of the subsequent commands:
+			?maybe we can have the emulator check and decrement the timer values after each instruction is fetched
+			and executed?
