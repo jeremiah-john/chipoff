@@ -9,16 +9,23 @@
 //we'll use stdint.h
 unsigned char delayTimer = 0;
 unsigned char soundTimer = 0;
-
+clock_t delayTimerSetTime; //we'll set this time when the delay timer is set
+clock_t delayTimerRequestTime; //we set this when an instruction requires the value in the delay Timer
+//we then subtract this time from the time the delay timer was last set, multiply (or divide) by the frequency to get the correct current value of the timer
+//then we return that in getDelayTimerVal
+//we'll do something similar for the sound timer
 unsigned char getDelayTimerVal(unsigned char *destRegister)
 {
-	*destRegister = delayTimer;
+	delayTimerRequestTime = clock();
+	double secondsPassed = (double) (delayTimerRequestTime - delayTimerSetTime) / CLOCKS_PER_SEC;
+	delayTimer -= (int) secondsPassed*60;
 	return 0;
 }
 
 unsigned char setDelayTimerVal(unsigned char *sourceRegister)
 {
 	delayTimer = *sourceRegister;
+	delayTimerSetTime = clock();
 	return 0;
 }
 
@@ -26,11 +33,4 @@ unsigned char setSoundTimerVal(unsigned char *sourceRegister)
 {
 	soundTimer = *sourceRegister;
 	return 0;
-}
-void decrementDT()
-{
-	if (delayTimer != 0)
-	{
-		delayTimer--;
-	} //this is a placeholder, we'll figure it out later
 }
