@@ -1,5 +1,4 @@
-#include <time.h>
-#include <stdint.h>
+#include "standard.h"
 #include "timer.h"
 //I think I set the timers as unsigned chars because of the space but 
 //this might mess with the way the program interprets the numbers

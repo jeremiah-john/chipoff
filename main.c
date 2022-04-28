@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
+#include "standard.h"
 #include "memory.h"
 
 
