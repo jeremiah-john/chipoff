@@ -8,3 +8,9 @@ short programCounter; //program counter is 16 bits
 unsigned char stackPointer; //stackPointer points to the topmost level of stack, must be 8-bit
 
 short stack[16]; //stack has 16 16-bit values.
+
+int startProgram()
+{
+	programCounter = 512; //we set the start of the program, that is, the address of the first instruction
+	return 0;
+}
