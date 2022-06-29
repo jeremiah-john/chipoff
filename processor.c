@@ -19,3 +19,11 @@ int startProgram()
 	return 0;
 }
 
+short getProgramCounter()
+{
+	return programCounter;
+}
+void setProgramCounter(short newVal)
+{
+	programCounter = newVal;
+}
