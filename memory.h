@@ -2,7 +2,5 @@
 #define MEMORY_HEADER
 
 int loadProgram(char *fileName);
-int writeMemToMem(int firstLocation, int secondLocation);
-int writeRegToMem(int regNumber, int memoryLocation);
-int writeRegToReg(int firstReg, int secondReg);
+short getInstruction(short address); //address is short because most times, the value provided will be the programCounter
 #endif

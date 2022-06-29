@@ -18,7 +18,7 @@ int loadProgram(char *gameFileName)
 	else
 	{
 		//we should include option to load programs for ETI 660 into location 1536 instead of 512
-		unsigned char *nextBlock = mainMemory[512]; //contains the next block of data in the mainmemory array to write to
+		unsigned char *nextBlock = &mainMemory[512]; //contains the next block of data in the mainmemory array to write to
 		//most programs will start at location 512
 		while (!feof(currentGame))
 		{
@@ -35,16 +35,16 @@ int loadProgram(char *gameFileName)
 	fclose(currentGame);
 	return 0;
 }
-//move the memory in the first location to the second location
-int writeMemToMem(int firstLocation, int secondLocation)
-{	//if the memory locations are not valid, fatal quit
-	if(firstLocation >= 4096 || secondLocation >= 4096)
-	{
-		fprintf(stderr, "the program is trying to access memory outside what is allocated for it! (only 4096 bytes accessible) exiting with SIGSEGV value (11)\n");
-		exit(11);
-	}
-	
-	mainMemory[secondLocation] = mainMemory[firstLocation];
-	//find out if we clean firstLocation data or keep it
-	return 0;
+/* get the instruction starting at the provided address
+ * instructions are 2 bytes long while address space is 1 byte,
+ * meaning this function must combine 2 address spaces into one short
+ * (6/29/2022) going to try just casting the address into a short pointer
+ * but perhaps it would safe to avoid alignment issues and just bit shift the first value by 8 bits, then add to
+ * that the second value
+ */
+short getInstruction(short address)
+{
+	int addressConvertedToInt = (int) address;
+	short firstHalf = (short) mainMemory[addressConvertedToInt];
+	short secondHalf = (short) mainMemory[addressConvertedToInt];
 }
