@@ -46,7 +46,7 @@ short getInstruction(short address)
 {
 	int addressConvertedToInt = (int) address;
 	short firstHalf = (short) mainMemory[addressConvertedToInt];//first half of instruction
-	short secondHalf = (short) mainMemory[addressConvertedToInt];//second half of instruction
+	short secondHalf = (short) mainMemory[addressConvertedToInt+1];//second half of instruction
 	firstHalf = firstHalf << 8; //shifts the first half to the "first half" of the short so we can more easily
 	//combine the two parts of the instructions
 	firstHalf += secondHalf;

@@ -5,11 +5,11 @@
 void mainLoop()
 {
 	//fetch part
-	getInstruction(getProgramCounter());
+	short currentInstruction = getInstruction(getProgramCounter());
 	setProgramCounter(getProgramCounter() + 2); //set PC to next instruction in memory (which is 2 bytes ahead)
-	//decode part here
 
-	//execute part here
+	//decode-execute part here
+	//executeInstruction(currentInstruction);
 }
 
 int main()
