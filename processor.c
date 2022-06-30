@@ -5,7 +5,7 @@
  * remove any confusion? (comment made 6/28/2022)
  */
  
-static unsigned char V[16]; //the general purpose registers, in Chip-8 documentation referred to as Vx. from V0 to VF
+static unsigned char V[16] = {0}; //the general purpose registers, in Chip-8 documentation referred to as Vx. from V0 to VF
 //VF is used as a flag by some instructions, not used by any program
 //delay and sound timers are specified in timer.c and there are access functions for those already
 
@@ -14,11 +14,13 @@ short iReg;
 short programCounter; //program counter is 16 bits
 unsigned char stackPointer; //stackPointer points to the topmost level of stack, must be 8-bit
 
-short stack[16]; //stack has 16 16-bit values.
+short stack[16] = {0}; //stack has 16 16-bit values.
 
 int startProgram()
 {
 	programCounter = 512; //we set the start of the program, that is, the address of the first instruction
+	iReg = 0;
+	stackPointer = -1; //since nothing is in the stack at runtime, it shouldn't point to anywhere on the stack at that time
 	return 0;
 }
 
@@ -56,10 +58,19 @@ void executeInstruction(short instruction)
 	}
 	else if (tempInstructionVar = 1) //must be the JP instruction
 	{
-
+		//reset tempInstruction so we get the correct bits
+		tempInstructionVar = (instruction & remainderTwelve );
+		//set program counter to remaining twelve bits of instruction
+		programCounter = tempInstructionVar; 
 	}
 	else if (tempInstructionVar = 2) //must be Call instruction
 	{
-
+		//increment stack pointer then place PC at new top of stack
+		stackPointer++;
+		stack[stackPointer] = programCounter;
+		//now set PC to address specified in nnn, last 12 bits of instruction
+		tempInstructionVar = (instruction & remainderTwelve);
+		programCounter = tempInstructionVar;
+		
 	}
 }
